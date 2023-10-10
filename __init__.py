@@ -2,7 +2,7 @@ from nltk.ccg import lexicon
 
 __all__ = ["generate"]
 
-def generate(lex: lexicon.CCGLexicon, depth: int):
+def generate(lex: lexicon.CCGLexicon, max_len: int):
     # tab[lenght-1][category]{instance: str}
     tab = [dict()]
 
@@ -12,7 +12,7 @@ def generate(lex: lexicon.CCGLexicon, depth: int):
             tab[0].setdefault(cat, set())
             tab[0][cat].add(text)
 
-    for k in range(1, depth):
+    for k in range(1, max_len):
         tab.append(dict())
         for a in range(k):
             b = k-a-1 # (a+1) + (b+1) == (k+1)
